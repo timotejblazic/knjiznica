@@ -56,6 +56,21 @@ namespace web.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Ime")]
+            public string Ime { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Priimek")]
+            public string Priimek { get; set; }
+
+            [Required]
+            [DataType(DataType.DateTime)]
+            [Display(Name = "Cas Vpisa")]
+            public DateTime CasVpisa { get; set; }
+
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
@@ -70,6 +85,9 @@ namespace web.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                Ime = user.Ime,
+                Priimek = user.Priimek,
+                CasVpisa = user.CasVpisa,
                 PhoneNumber = phoneNumber
             };
         }
@@ -110,6 +128,23 @@ namespace web.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+            if (Input.Ime != user.Ime)
+            {
+                user.Ime = Input.Ime;
+            }
+
+            if (Input.Priimek != user.Priimek)
+            {
+                user.Priimek = Input.Priimek;
+            }
+
+            if (Input.CasVpisa != user.CasVpisa)
+            {
+                user.CasVpisa = Input.CasVpisa;
+            }
+
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

@@ -71,6 +71,21 @@ namespace web.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Ime")]
+            public string Ime { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Priimek")]
+            public string Priimek { get; set; }
+
+            [Required]
+            [DataType(DataType.DateTime)]
+            [Display(Name = "CasVpisa")]
+            public DateTime CasVpisa { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -113,10 +128,18 @@ namespace web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                var user = new Uporabnik {
+                    Ime = Input.Ime,
+                    Priimek = Input.Priimek,
+                    CasVpisa = DateTime.Now,
+                    UserName = Input.Email,
+                    Email = Input.Email
+                };
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                // var user = CreateUser();
+
+                // await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                // await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
