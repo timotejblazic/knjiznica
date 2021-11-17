@@ -25,18 +25,19 @@
                 @Html.DisplayNameFor(model => model.Opis)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KategorijaID)
+                @Html.DisplayNameFor(model => model.Kategorija)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ZanrID)
+                @Html.DisplayNameFor(model => model.Zanr)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ZalozbaID)
+                @Html.DisplayNameFor(model => model.Zalozba)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
+        
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -52,15 +53,16 @@
                 @Html.DisplayFor(modelItem => item.Opis)
             </td>
              <td>
-                @Html.DisplayFor(modelItem => item.KategorijaID)
+                @Html.DisplayFor(modelItem => item.Kategorija.Naziv)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ZanrID)
+                @Html.DisplayFor(modelItem => item.Zanr.Naziv)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ZalozbaID)
+                @Html.DisplayFor(modelItem => item.Zalozba.Naziv)
             </td>
             <td>
+                <a asp-action="Index" asp-route-id="@item.GradivoID">Select</a> |                
                 <a asp-action="Edit" asp-route-id="@item.GradivoID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.GradivoID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.GradivoID">Delete</a>
@@ -69,3 +71,32 @@
 }
     </tbody>
 </table>
+@* 
+@if (Model.GradivaIzvodi != null)
+{
+    <h3>Izvodi gradiva</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Number</th>
+        </tr>
+
+        @foreach (var item in Model.GradivaIzvodi)
+        {
+            string selectedRow = "";
+            if (item.GradivoIzvodID == (int?)ViewData["GradivoIzvodID"])
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @item.GradivoIzvodID
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { GradivoIzvodID = item.GradivoIzvodID })
+                </td>
+            </tr>
+        }
+
+    </table>
+} *@
