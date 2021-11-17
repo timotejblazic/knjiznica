@@ -49,6 +49,7 @@ namespace web.Controllers
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv");
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv");
             ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv");
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime");
             return View();
         }
 
@@ -57,7 +58,7 @@ namespace web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID")] Gradivo gradivo)
+        public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +68,8 @@ namespace web.Controllers
             }
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv", gradivo.KategorijaID);
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
-            ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZanrID);
+            ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZalozbaID);
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime", gradivo.AvtorID);
             return View(gradivo);
         }
 

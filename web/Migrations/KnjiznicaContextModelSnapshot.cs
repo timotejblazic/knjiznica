@@ -22,21 +22,6 @@ namespace web.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("AvtorGradivo", b =>
-                {
-                    b.Property<int>("AvtorjiAvtorID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GradivaGradivoID")
-                        .HasColumnType("int");
-
-                    b.HasKey("AvtorjiAvtorID", "GradivaGradivoID");
-
-                    b.HasIndex("GradivaGradivoID");
-
-                    b.ToTable("AvtorGradivo");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -207,6 +192,9 @@ namespace web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GradivoID"), 1L, 1);
 
+                    b.Property<int>("AvtorID")
+                        .HasColumnType("int");
+
                     b.Property<int>("KategorijaID")
                         .HasColumnType("int");
 
@@ -231,6 +219,8 @@ namespace web.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("GradivoID");
+
+                    b.HasIndex("AvtorID");
 
                     b.HasIndex("KategorijaID");
 
@@ -485,21 +475,6 @@ namespace web.Migrations
                     b.ToTable("Zanr", (string)null);
                 });
 
-            modelBuilder.Entity("AvtorGradivo", b =>
-                {
-                    b.HasOne("web.Models.Avtor", null)
-                        .WithMany()
-                        .HasForeignKey("AvtorjiAvtorID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("web.Models.Gradivo", null)
-                        .WithMany()
-                        .HasForeignKey("GradivaGradivoID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -553,6 +528,12 @@ namespace web.Migrations
 
             modelBuilder.Entity("web.Models.Gradivo", b =>
                 {
+                    b.HasOne("web.Models.Avtor", "Avtor")
+                        .WithMany("Gradiva")
+                        .HasForeignKey("AvtorID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("web.Models.Kategorija", "Kategorija")
                         .WithMany("Gradiva")
                         .HasForeignKey("KategorijaID")
@@ -570,6 +551,8 @@ namespace web.Migrations
                         .HasForeignKey("ZanrID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Avtor");
 
                     b.Navigation("Kategorija");
 
@@ -642,6 +625,11 @@ namespace web.Migrations
                     b.Navigation("Gradivo");
 
                     b.Navigation("Uporabnik");
+                });
+
+            modelBuilder.Entity("web.Models.Avtor", b =>
+                {
+                    b.Navigation("Gradiva");
                 });
 
             modelBuilder.Entity("web.Models.Gradivo", b =>

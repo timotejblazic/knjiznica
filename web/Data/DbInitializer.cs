@@ -71,9 +71,9 @@ namespace web.Data
             context.SaveChanges();
 
             var gradiva=new Gradivo[]{
-                new Gradivo{Naslov="Alica v čudežni deželi",LetoIzdaje=2005,SteviloStrani=168,Opis="Alica se odpravi v čudežno deželo, kjer...",KategorijaID=1, ZanrID=2,ZalozbaID=3},
-                new Gradivo{Naslov="Asterix in Obelix",LetoIzdaje=1999,SteviloStrani=53,Opis="Sledi Asterixu in Obelixu na njunih dogodivščinah",KategorijaID=2, ZanrID=1,ZalozbaID=2},
-                new Gradivo{Naslov="Ta veseli dan",LetoIzdaje=1966,SteviloStrani=300,Opis="Ta veseli dan ali Matiček se ženi govori o...",KategorijaID=3, ZanrID=2,ZalozbaID=5}
+                new Gradivo{Naslov="Alica v čudežni deželi",LetoIzdaje=2005,SteviloStrani=168,Opis="Alica se odpravi v čudežno deželo, kjer...",KategorijaID=1, ZanrID=2,ZalozbaID=3,AvtorID=1},
+                new Gradivo{Naslov="Asterix in Obelix",LetoIzdaje=1999,SteviloStrani=53,Opis="Sledi Asterixu in Obelixu na njunih dogodivščinah",KategorijaID=2, ZanrID=1,ZalozbaID=2,AvtorID=2},
+                new Gradivo{Naslov="Ta veseli dan",LetoIzdaje=1966,SteviloStrani=300,Opis="Ta veseli dan ali Matiček se ženi govori o...",KategorijaID=3, ZanrID=2,ZalozbaID=5,AvtorID=3}
             };
             foreach (Gradivo g in gradiva)
             {
