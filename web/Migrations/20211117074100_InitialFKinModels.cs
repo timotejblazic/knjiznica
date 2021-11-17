@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace web.Migrations
 {
-    public partial class InitialWithIdentity : Migration
+    public partial class InitialFKinModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -153,8 +153,8 @@ namespace web.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -198,8 +198,8 @@ namespace web.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -221,14 +221,14 @@ namespace web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DatumIzposoje = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DatumVrnitve = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UporabnikId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UporabnikID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Izposoja", x => x.IzposojaID);
                     table.ForeignKey(
-                        name: "FK_Izposoja_AspNetUsers_UporabnikId",
-                        column: x => x.UporabnikId,
+                        name: "FK_Izposoja_AspNetUsers_UporabnikID",
+                        column: x => x.UporabnikID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -242,14 +242,14 @@ namespace web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DatumNakupa = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Cena = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UporabnikId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    UporabnikID = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Nakup", x => x.NakupID);
                     table.ForeignKey(
-                        name: "FK_Nakup_AspNetUsers_UporabnikId",
-                        column: x => x.UporabnikId,
+                        name: "FK_Nakup_AspNetUsers_UporabnikID",
+                        column: x => x.UporabnikID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -357,15 +357,15 @@ namespace web.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Vrednost = table.Column<int>(type: "int", nullable: false),
                     Mnenje = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UporabnikId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    UporabnikID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GradivoID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ocena", x => x.OcenaID);
                     table.ForeignKey(
-                        name: "FK_Ocena_AspNetUsers_UporabnikId",
-                        column: x => x.UporabnikId,
+                        name: "FK_Ocena_AspNetUsers_UporabnikID",
+                        column: x => x.UporabnikID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -452,14 +452,14 @@ namespace web.Migrations
                 column: "NakupID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Izposoja_UporabnikId",
+                name: "IX_Izposoja_UporabnikID",
                 table: "Izposoja",
-                column: "UporabnikId");
+                column: "UporabnikID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Nakup_UporabnikId",
+                name: "IX_Nakup_UporabnikID",
                 table: "Nakup",
-                column: "UporabnikId");
+                column: "UporabnikID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ocena_GradivoID",
@@ -467,9 +467,9 @@ namespace web.Migrations
                 column: "GradivoID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ocena_UporabnikId",
+                name: "IX_Ocena_UporabnikID",
                 table: "Ocena",
-                column: "UporabnikId");
+                column: "UporabnikID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

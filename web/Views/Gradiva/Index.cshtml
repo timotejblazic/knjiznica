@@ -24,6 +24,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Opis)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KategorijaID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZanrID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZalozbaID)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -41,6 +50,15 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.KategorijaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZanrID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZalozbaID)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.GradivoID">Edit</a> |

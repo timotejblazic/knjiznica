@@ -46,9 +46,9 @@ namespace web.Controllers
         // GET: Gradiva/Create
         public IActionResult Create()
         {
-            // ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv");
-            // ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv");
-            // ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv");
+            ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv");
+            ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv");
+            ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis")] Gradivo gradivo)
+        public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID")] Gradivo gradivo)
         {
             if (ModelState.IsValid)
             {
@@ -65,9 +65,9 @@ namespace web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            // ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv", gradivo.KategorijaID);
-            // ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
-            // ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZanrID);
+            ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv", gradivo.KategorijaID);
+            ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
+            ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZanrID);
             return View(gradivo);
         }
 

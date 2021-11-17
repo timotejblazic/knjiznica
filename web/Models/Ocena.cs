@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace web.Models
 {
@@ -15,7 +16,11 @@ namespace web.Models
         public string? Mnenje { get; set; }
 
         //one
+        [ForeignKey("Uporabnik")]
+        public string UporabnikID { get; set; }
         public Uporabnik Uporabnik { get; set; }
+        [ForeignKey("Gradivo")]
+        public int GradivoID { get; set; }
         public Gradivo Gradivo { get; set; }
     }
 }

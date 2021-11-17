@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace web.Models
 {
@@ -10,6 +11,8 @@ namespace web.Models
         public DateTime DatumVrnitve { get; set; } 
         
         //one
+        [ForeignKey("Uporabnik")]
+        public string UporabnikID { get; set; }
         public Uporabnik Uporabnik { get; set; }
 
         //many

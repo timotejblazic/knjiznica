@@ -283,12 +283,13 @@ namespace web.Migrations
                     b.Property<DateTime>("DatumVrnitve")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UporabnikId")
+                    b.Property<string>("UporabnikID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("IzposojaID");
 
-                    b.HasIndex("UporabnikId");
+                    b.HasIndex("UporabnikID");
 
                     b.ToTable("Izposoja", (string)null);
                 });
@@ -325,12 +326,13 @@ namespace web.Migrations
                     b.Property<DateTime>("DatumNakupa")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UporabnikId")
+                    b.Property<string>("UporabnikID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("NakupID");
 
-                    b.HasIndex("UporabnikId");
+                    b.HasIndex("UporabnikID");
 
                     b.ToTable("Nakup", (string)null);
                 });
@@ -349,7 +351,8 @@ namespace web.Migrations
                     b.Property<string>("Mnenje")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UporabnikId")
+                    b.Property<string>("UporabnikID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Vrednost")
@@ -359,7 +362,7 @@ namespace web.Migrations
 
                     b.HasIndex("GradivoID");
 
-                    b.HasIndex("UporabnikId");
+                    b.HasIndex("UporabnikID");
 
                     b.ToTable("Ocena", (string)null);
                 });
@@ -604,8 +607,9 @@ namespace web.Migrations
                 {
                     b.HasOne("web.Models.Uporabnik", "Uporabnik")
                         .WithMany("Izposoje")
-                        .HasForeignKey("UporabnikId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("UporabnikID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Uporabnik");
                 });
@@ -614,8 +618,9 @@ namespace web.Migrations
                 {
                     b.HasOne("web.Models.Uporabnik", "Uporabnik")
                         .WithMany("Nakupi")
-                        .HasForeignKey("UporabnikId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("UporabnikID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Uporabnik");
                 });
@@ -630,8 +635,9 @@ namespace web.Migrations
 
                     b.HasOne("web.Models.Uporabnik", "Uporabnik")
                         .WithMany("Ocene")
-                        .HasForeignKey("UporabnikId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("UporabnikID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Gradivo");
 
