@@ -33,6 +33,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Zalozba)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Avtor)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -60,6 +63,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Zalozba.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avtor.Ime)
+                @Html.DisplayFor(modelItem => item.Avtor.Priimek)
             </td>
             <td>
                 <a asp-action="Index" asp-route-id="@item.GradivoID">Select</a> |                

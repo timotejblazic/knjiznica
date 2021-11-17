@@ -26,6 +26,7 @@ namespace web.Controllers
                 .Include(z => z.Zanr)
                 .Include(k => k.Kategorija)//mogoce ThenInclude
                 .Include(za => za.Zalozba)//mogoce ThenInclude
+                .Include(a => a.Avtor)
 
                 .AsNoTracking();
                 
