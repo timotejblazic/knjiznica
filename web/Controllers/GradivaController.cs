@@ -22,7 +22,15 @@ namespace web.Controllers
         // GET: Gradiva
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Gradiva.ToListAsync());
+            var gradiva = _context.Gradiva
+                .Include(z => z.Zanr)
+                .Include(k => k.Kategorija)//mogoce ThenInclude
+                .Include(za => za.Zalozba)//mogoce ThenInclude
+
+                .AsNoTracking();
+                
+            return View(await gradiva.ToListAsync());
+            
         }
 
         // GET: Gradiva/Details/5
@@ -49,6 +57,7 @@ namespace web.Controllers
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv");
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv");
             ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv");
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime");
             return View();
         }
 
@@ -57,7 +66,7 @@ namespace web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID")] Gradivo gradivo)
+        public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +77,7 @@ namespace web.Controllers
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv", gradivo.KategorijaID);
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
             ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZanrID);
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime");
             return View(gradivo);
         }
 

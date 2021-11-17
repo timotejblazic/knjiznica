@@ -22,9 +22,11 @@ namespace web.Models
         [ForeignKey("Zalozba")]
         public int ZalozbaID { get; set; }
         public Zalozba Zalozba { get; set; }
+        [ForeignKey("Avtor")]
+        public int AvtorID { get; set; }
+        public Avtor Avtor { get; set; }
 
         //many
-        public ICollection<Avtor>? Avtorji { get; set; }
         public ICollection<GradivoIzvod>? GradivoIzvodi { get; set; }
         public ICollection<Ocena>? Ocene { get; set; }
     }

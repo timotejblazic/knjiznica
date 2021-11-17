@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace web.Migrations
 {
-    public partial class InitialFKinModels : Migration
+    public partial class DbInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -267,11 +267,18 @@ namespace web.Migrations
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KategorijaID = table.Column<int>(type: "int", nullable: false),
                     ZanrID = table.Column<int>(type: "int", nullable: false),
-                    ZalozbaID = table.Column<int>(type: "int", nullable: false)
+                    ZalozbaID = table.Column<int>(type: "int", nullable: false),
+                    AvtorID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Gradivo", x => x.GradivoID);
+                    table.ForeignKey(
+                        name: "FK_Gradivo_Avtor_AvtorID",
+                        column: x => x.AvtorID,
+                        principalTable: "Avtor",
+                        principalColumn: "AvtorID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Gradivo_Kategorija_KategorijaID",
                         column: x => x.KategorijaID,
@@ -289,30 +296,6 @@ namespace web.Migrations
                         column: x => x.ZanrID,
                         principalTable: "Zanr",
                         principalColumn: "ZanrID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AvtorGradivo",
-                columns: table => new
-                {
-                    AvtorjiAvtorID = table.Column<int>(type: "int", nullable: false),
-                    GradivaGradivoID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AvtorGradivo", x => new { x.AvtorjiAvtorID, x.GradivaGradivoID });
-                    table.ForeignKey(
-                        name: "FK_AvtorGradivo_Avtor_AvtorjiAvtorID",
-                        column: x => x.AvtorjiAvtorID,
-                        principalTable: "Avtor",
-                        principalColumn: "AvtorID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AvtorGradivo_Gradivo_GradivaGradivoID",
-                        column: x => x.GradivaGradivoID,
-                        principalTable: "Gradivo",
-                        principalColumn: "GradivoID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -417,9 +400,9 @@ namespace web.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AvtorGradivo_GradivaGradivoID",
-                table: "AvtorGradivo",
-                column: "GradivaGradivoID");
+                name: "IX_Gradivo_AvtorID",
+                table: "Gradivo",
+                column: "AvtorID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Gradivo_KategorijaID",
@@ -490,9 +473,6 @@ namespace web.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AvtorGradivo");
-
-            migrationBuilder.DropTable(
                 name: "GradivoIzvod");
 
             migrationBuilder.DropTable(
@@ -500,9 +480,6 @@ namespace web.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Avtor");
 
             migrationBuilder.DropTable(
                 name: "Izposoja");
@@ -515,6 +492,9 @@ namespace web.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Avtor");
 
             migrationBuilder.DropTable(
                 name: "Kategorija");
