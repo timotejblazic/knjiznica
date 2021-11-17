@@ -22,6 +22,7 @@ namespace web.Controllers
         // GET: Gradiva
         public async Task<IActionResult> Index()
         {
+            //Tkaj sem naredil sspremembe
             var gradiva = _context.Gradiva
                 .Include(z => z.Zanr)
                 .Include(k => k.Kategorija)//mogoce ThenInclude
