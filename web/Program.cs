@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("KnjiznicaContext");
 
-// Add services to the container.
+// Add services to the container.lel
 builder.Services.AddControllersWithViews();
 builder.Services.AddDefaultIdentity<Uporabnik>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
