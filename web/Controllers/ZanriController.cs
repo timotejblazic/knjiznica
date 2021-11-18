@@ -21,9 +21,41 @@ namespace web.Controllers
         }
 
         // GET: Zanri
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            return View(await _context.Zanri.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NazivSortParm"] = String.IsNullOrEmpty(sortOrder) ? "naziv_desc" : "";
+            
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            
+            ViewData["CurrentFilter"] = searchString;
+            var zanri = from z in _context.Zanri
+                        select z;
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                zanri = zanri.Where(z => z.Naziv.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "naziv_desc":
+                    zanri = zanri.OrderByDescending(z => z.Naziv);
+                    break;
+                default:
+                    zanri = zanri.OrderBy(z => z.Naziv);
+                    break;
+            }
+
+            int pageSize = 5;
+            return View(await PaginatedList<Zanr>.CreateAsync(zanri.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Zanri/Details/5

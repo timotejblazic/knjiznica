@@ -20,19 +20,66 @@ namespace web.Controllers
         }
 
         // GET: Gradiva
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            //Tkaj sem naredil sspremembe
-            var gradiva = _context.Gradiva
-                .Include(z => z.Zanr)
-                .Include(k => k.Kategorija)//mogoce ThenInclude
-                .Include(za => za.Zalozba)//mogoce ThenInclude
-                .Include(a => a.Avtor)
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NaslovSortParm"] = String.IsNullOrEmpty(sortOrder) ? "naslov_desc" : "";
+            ViewData["LetoIzdajeSortParm"] = (String.IsNullOrEmpty(sortOrder) || sortOrder=="letoIzdaje") ? "letoIzdaje_desc" : "letoIzdaje";
+            ViewData["SteviloStraniSortParm"] = (String.IsNullOrEmpty(sortOrder) || sortOrder=="steviloStrani") ? "steviloStrani_desc" : "steviloStrani";
 
-                .AsNoTracking();
-                
-            return View(await gradiva.ToListAsync());
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
             
+            ViewData["CurrentFilter"] = searchString;
+            var gradiva = from g in _context.Gradiva
+                                        .Include(z => z.Zanr)
+                                        .Include(k => k.Kategorija)
+                                        .Include(za => za.Zalozba)
+                                        .Include(a => a.Avtor)
+                                        .AsNoTracking()
+                        select g;
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                gradiva = gradiva.Where(g => g.Naslov.Contains(searchString)
+                                    || g.Opis.Contains(searchString)
+                                    || g.Kategorija.Naziv.Contains(searchString)
+                                    || g.Zanr.Naziv.Contains(searchString)
+                                    || g.Zalozba.Naziv.Contains(searchString)
+                                    || g.Avtor.Ime.Contains(searchString)
+                                    || g.Avtor.Priimek.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "naslov_desc":
+                    gradiva = gradiva.OrderByDescending(g => g.Naslov);
+                    break;
+                case "letoIzdaje":
+                    gradiva = gradiva.OrderBy(g => g.LetoIzdaje);
+                    break;
+                case "letoIzdaje_desc":
+                    gradiva = gradiva.OrderByDescending(g => g.LetoIzdaje);
+                    break;
+                case "steviloStrani":
+                    gradiva = gradiva.OrderBy(g => g.SteviloStrani);
+                    break;
+                case "steviloStrani_desc":
+                    gradiva = gradiva.OrderByDescending(g => g.SteviloStrani);
+                    break;
+                default:
+                    gradiva = gradiva.OrderBy(g => g.Naslov);
+                    break;
+            }
+
+            int pageSize = 5;
+            return View(await PaginatedList<Gradivo>.CreateAsync(gradiva.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Gradiva/Details/5
@@ -44,6 +91,10 @@ namespace web.Controllers
             }
 
             var gradivo = await _context.Gradiva
+                .Include(a => a.Avtor)
+                .Include(z => z.Zanr)
+                .Include(k => k.Kategorija)
+                .Include(za => za.Zalozba)
                 .FirstOrDefaultAsync(m => m.GradivoID == id);
             if (gradivo == null)
             {
@@ -70,16 +121,24 @@ namespace web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(gradivo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(gradivo);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine("NAPAKA: " + ex);
+            }
+            
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv", gradivo.KategorijaID);
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
-            ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZanrID);
-            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime");
+            ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZalozbaID);
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime", gradivo.AvtorID);
             return View(gradivo);
         }
 
@@ -96,6 +155,11 @@ namespace web.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv");
+            ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv");
+            ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv");
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime");
             return View(gradivo);
         }
 
@@ -104,7 +168,7 @@ namespace web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis")] Gradivo gradivo)
+        public async Task<IActionResult> Edit(int id, [Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
         {
             if (id != gradivo.GradivoID)
             {
@@ -131,6 +195,11 @@ namespace web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv", gradivo.KategorijaID);
+            ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
+            ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZalozbaID);
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime", gradivo.AvtorID);
             return View(gradivo);
         }
 

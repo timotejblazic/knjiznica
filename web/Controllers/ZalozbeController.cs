@@ -20,9 +20,41 @@ namespace web.Controllers
         }
 
         // GET: Zalozbe
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            return View(await _context.Zalozbe.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NazivSortParm"] = String.IsNullOrEmpty(sortOrder) ? "naziv_desc" : "";
+            
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            
+            ViewData["CurrentFilter"] = searchString;
+            var zalozbe = from z in _context.Zalozbe
+                        select z;
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                zalozbe = zalozbe.Where(z => z.Naziv.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "naziv_desc":
+                    zalozbe = zalozbe.OrderByDescending(z => z.Naziv);
+                    break;
+                default:
+                    zalozbe = zalozbe.OrderBy(z => z.Naziv);
+                    break;
+            }
+
+            int pageSize = 5;
+            return View(await PaginatedList<Zalozba>.CreateAsync(zalozbe.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Zalozbe/Details/5

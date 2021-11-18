@@ -20,9 +20,49 @@ namespace web.Controllers
         }
 
         // GET: Avtorji
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            return View(await _context.Avtorji.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["ImeSortParm"] = String.IsNullOrEmpty(sortOrder) ? "ime_desc" : "";
+            ViewData["PriimekSortParm"] = (String.IsNullOrEmpty(sortOrder) || sortOrder=="priimek") ? "priimek_desc" : "priimek";
+            
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            
+            ViewData["CurrentFilter"] = searchString;
+            var avtorji = from a in _context.Avtorji
+                        select a;
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                avtorji = avtorji.Where(a => a.Priimek.Contains(searchString)
+                                    || a.Ime.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "ime_desc":
+                    avtorji = avtorji.OrderByDescending(a => a.Ime);
+                    break;
+                case "priimek":
+                    avtorji = avtorji.OrderBy(a => a.Priimek);
+                    break;
+                case "priimek_desc":
+                    avtorji = avtorji.OrderByDescending(a => a.Priimek);
+                    break;
+                default:
+                    avtorji = avtorji.OrderBy(a => a.Ime);
+                    break;
+            }
+
+            int pageSize = 5;
+            return View(await PaginatedList<Avtor>.CreateAsync(avtorji.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Avtorji/Details/5

@@ -34,6 +34,31 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Opis)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Avtor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Avtor.Ime)
+            @Html.DisplayFor(model => model.Avtor.Priimek)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kategorija)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kategorija.Naziv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zanr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zanr.Naziv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Zalozba)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Zalozba.Naziv)
+        </dd>
     </dl>
 </div>
 <div>

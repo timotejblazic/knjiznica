@@ -20,9 +20,41 @@ namespace web.Controllers
         }
 
         // GET: Kategorije
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            return View(await _context.Kategorije.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NazivSortParm"] = String.IsNullOrEmpty(sortOrder) ? "naziv_desc" : "";
+            
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            
+            ViewData["CurrentFilter"] = searchString;
+            var kategorije = from k in _context.Kategorije
+                        select k;
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                kategorije = kategorije.Where(k => k.Naziv.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "naziv_desc":
+                    kategorije = kategorije.OrderByDescending(k => k.Naziv);
+                    break;
+                default:
+                    kategorije = kategorije.OrderBy(k => k.Naziv);
+                    break;
+            }
+
+            int pageSize = 5;
+            return View(await PaginatedList<Kategorija>.CreateAsync(kategorije.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Kategorije/Details/5

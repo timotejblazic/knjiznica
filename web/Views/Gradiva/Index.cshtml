@@ -1,4 +1,4 @@
-@model IEnumerable<web.Models.Gradivo>
+@model PaginatedList<web.Models.Gradivo>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,32 +9,43 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Isci: <input type="text" name="SearchString" value='@ViewData["CurrentFilter"]' />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Prikaži vse</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Naslov)
+                <a asp-action="Index" asp-route-sortOrder='@ViewData["NaslovSortParm"]' asp-route-currentFilter='@ViewData["CurrentFilter"]'>Naslov</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LetoIzdaje)
+                <a asp-action="Index" asp-route-sortOrder='@ViewData["LetoIzdajeSortParm"]' asp-route-currentFilter='@ViewData["CurrentFilter"]'>Leto izdaje</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SteviloStrani)
+                <a asp-action="Index" asp-route-sortOrder='@ViewData["SteviloStraniSortParm"]' asp-route-currentFilter='@ViewData["CurrentFilter"]'>Stevilo strani</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Opis)
+                Opis
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Kategorija)
+                Kategorija
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Zanr)
+                Zanr
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Zalozba)
+                Zalozba
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Avtor)
+                Avtor
             </th>
             <th></th>
         </tr>
@@ -78,6 +89,30 @@
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder='@ViewData["CurrentSort"]'
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter='@ViewData["CurrentFilter"]'
+   class="btn btn-default @prevDisabled">
+    Prejšnja
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder='@ViewData["CurrentSort"]'
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter='@ViewData["CurrentFilter"]'
+   class="btn btn-default @nextDisabled">
+    Naslednja
+</a>
+
+
+
+
 @* 
 @if (Model.GradivaIzvodi != null)
 {
