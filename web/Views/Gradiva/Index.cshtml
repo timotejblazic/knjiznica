@@ -53,7 +53,12 @@
     <tbody>
         
 @foreach (var item in Model) {
-        <tr>
+    string selectedRow = "";
+    if (item.GradivoID == (int?)ViewData["GradivoID"])
+    {
+        selectedRow = "table-success";
+    }
+        <tr class="@selectedRow">
             <td>
                 @Html.DisplayFor(modelItem => item.Naslov)
             </td>
@@ -112,33 +117,31 @@
 
 
 
-
-@* 
-@if (Model.GradivaIzvodi != null)
+@if (ViewData["GradivoIzvodiFromGradivoID"] != null)
 {
-    <h3>Izvodi gradiva</h3>
+    <h3>Izvodi gradiv izbranega gradiva</h3>
     <table class="table">
         <tr>
             <th></th>
             <th>Number</th>
         </tr>
 
-        @foreach (var item in Model.GradivaIzvodi)
+        @foreach (var item in (IEnumerable<GradivoIzvod>)ViewData["GradivoIzvodiFromGradivoID"])
         {
-            string selectedRow = "";
+            @* TOLE BI PROU PRSLO PRI IZPOSOJI??string selectedRow = "";
             if (item.GradivoIzvodID == (int?)ViewData["GradivoIzvodID"])
             {
-                selectedRow = "table-success";
-            }
-            <tr class="@selectedRow">
+                selectedRow = "success";
+            } *@
+            <tr>
                 <td>
-                    @item.GradivoIzvodID
+                    @Html.ActionLink("Select", "Index", new { gradivoIzvodID = item.GradivoIzvodID })
                 </td>
                 <td>
-                    @Html.ActionLink("Select", "Index", new { GradivoIzvodID = item.GradivoIzvodID })
+                    @item.GradivoIzvodID
                 </td>
             </tr>
         }
 
     </table>
-} *@
+}

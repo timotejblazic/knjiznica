@@ -20,7 +20,7 @@ namespace web.Controllers
         }
 
         // GET: Gradiva
-        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber, int? id)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NaslovSortParm"] = String.IsNullOrEmpty(sortOrder) ? "naslov_desc" : "";
@@ -38,6 +38,7 @@ namespace web.Controllers
             
             ViewData["CurrentFilter"] = searchString;
             var gradiva = from g in _context.Gradiva
+                                        .Include(gi => gi.GradivoIzvodi)
                                         .Include(z => z.Zanr)
                                         .Include(k => k.Kategorija)
                                         .Include(za => za.Zalozba)
@@ -76,6 +77,14 @@ namespace web.Controllers
                 default:
                     gradiva = gradiva.OrderBy(g => g.Naslov);
                     break;
+            }
+
+            if (id != null)
+            {
+                ViewData["GradivoID"] = id.Value;
+                Gradivo gradivo1 = gradiva.Where(
+                    g => g.GradivoID == id.Value).Single();
+                ViewData["GradivoIzvodiFromGradivoID"] = gradivo1.GradivoIzvodi;
             }
 
             int pageSize = 5;
