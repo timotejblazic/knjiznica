@@ -100,6 +100,7 @@ namespace web.Controllers
             }
 
             var gradivo = await _context.Gradiva
+                .Include(o => o.Ocene)
                 .Include(a => a.Avtor)
                 .Include(z => z.Zanr)
                 .Include(k => k.Kategorija)
@@ -108,6 +109,13 @@ namespace web.Controllers
             if (gradivo == null)
             {
                 return NotFound();
+            }
+            if (id != null)
+            {
+                ViewData["GradivoID"] = id.Value;
+                Gradivo gradivo1 = _context.Gradiva.Where(
+                    g => g.GradivoID == id.Value).Single();
+                ViewData["OceneFromGradivoID"] = gradivo1.Ocene;
             }
 
             return View(gradivo);
