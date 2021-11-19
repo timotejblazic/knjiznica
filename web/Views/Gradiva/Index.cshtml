@@ -81,8 +81,10 @@
                 @Html.DisplayFor(modelItem => item.Zalozba.Naziv)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Avtor.Ime)
-                @Html.DisplayFor(modelItem => item.Avtor.Priimek)
+                <a class="text-decoration-none" asp-controller="Avtorji" asp-action="Details" asp-route-id="@item.Avtor.AvtorID">
+                    @Html.DisplayFor(modelItem => item.Avtor.Ime)
+                    @Html.DisplayFor(modelItem => item.Avtor.Priimek)
+                </a>
             </td>
             <td>
                 <a asp-action="Index" asp-route-id="@item.GradivoID">Select</a> |                
@@ -135,7 +137,7 @@
             } *@
             <tr>
                 <td>
-                    @Html.ActionLink("Select", "Index", new { gradivoIzvodID = item.GradivoIzvodID })
+                    @Html.ActionLink("Izposodi", "Index", new { gradivoIzvodID = item.GradivoIzvodID })
                 </td>
                 <td>
                     @item.GradivoIzvodID
