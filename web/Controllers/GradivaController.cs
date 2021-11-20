@@ -127,7 +127,7 @@ namespace web.Controllers
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv");
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv");
             ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv");
-            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime");
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "PolnoIme");
             return View();
         }
 
@@ -148,7 +148,7 @@ namespace web.Controllers
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv", gradivo.KategorijaID);
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
             ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZalozbaID);
-            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime", gradivo.AvtorID);
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "PolnoIme", gradivo.AvtorID);
             return View(gradivo);
         }
 
@@ -169,7 +169,7 @@ namespace web.Controllers
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv");
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv");
             ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv");
-            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime");
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "PolnoIme");
             return View(gradivo);
         }
 
@@ -209,7 +209,7 @@ namespace web.Controllers
             ViewData["KategorijaID"] = new SelectList(_context.Kategorije, "KategorijaID", "Naziv", gradivo.KategorijaID);
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
             ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZalozbaID);
-            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime", gradivo.AvtorID);
+            ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "PolnoIme", gradivo.AvtorID);
             return View(gradivo);
         }
 
