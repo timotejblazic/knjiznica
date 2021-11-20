@@ -10,8 +10,8 @@ namespace web.Models
 
         //one
         [ForeignKey("Gradivo")]
-        public int GradivoID { get; set; }
-        public Gradivo Gradivo { get; set; }
+        public int? GradivoID { get; set; }
+        public Gradivo? Gradivo { get; set; }
         [ForeignKey("Izposoja")]
         public int? IzposojaID { get; set; }
         public Izposoja? Izposoja { get; set; }

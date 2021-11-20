@@ -12,10 +12,10 @@ namespace web.Models
 
         //one
         [ForeignKey("Uporabnik")]
-        public string UporabnikID { get; set; }
-        public Uporabnik Uporabnik { get; set; }
+        public string? UporabnikID { get; set; }
+        public Uporabnik? Uporabnik { get; set; }
 
         //many
-        public ICollection<GradivoIzvod> GradivoIzvodi { get; set; }
+        public ICollection<GradivoIzvod>? GradivoIzvodi { get; set; }
     }
 }

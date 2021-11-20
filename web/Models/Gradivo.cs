@@ -14,17 +14,17 @@ namespace web.Models
 
         //one
         [ForeignKey("Kategorija")]
-        public int KategorijaID { get; set; }
-        public Kategorija Kategorija { get; set; }
+        public int? KategorijaID { get; set; }
+        public Kategorija? Kategorija { get; set; }
         [ForeignKey("Zanr")]
-        public int ZanrID { get; set; }
-        public Zanr Zanr { get; set; }
+        public int? ZanrID { get; set; }
+        public Zanr? Zanr { get; set; }
         [ForeignKey("Zalozba")]
-        public int ZalozbaID { get; set; }
-        public Zalozba Zalozba { get; set; }
+        public int? ZalozbaID { get; set; }
+        public Zalozba? Zalozba { get; set; }
         [ForeignKey("Avtor")]
-        public int AvtorID { get; set; }
-        public Avtor Avtor { get; set; }
+        public int? AvtorID { get; set; }
+        public Avtor? Avtor { get; set; }
 
         //many
         public ICollection<GradivoIzvod>? GradivoIzvodi { get; set; }

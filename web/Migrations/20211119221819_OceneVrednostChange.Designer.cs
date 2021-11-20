@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using web.Data;
 
@@ -11,9 +12,10 @@ using web.Data;
 namespace web.Migrations
 {
     [DbContext(typeof(KnjiznicaContext))]
-    partial class KnjiznicaContextModelSnapshot : ModelSnapshot
+    [Migration("20211119221819_OceneVrednostChange")]
+    partial class OceneVrednostChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,10 +194,10 @@ namespace web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GradivoID"), 1L, 1);
 
-                    b.Property<int?>("AvtorID")
+                    b.Property<int>("AvtorID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("KategorijaID")
+                    b.Property<int>("KategorijaID")
                         .HasColumnType("int");
 
                     b.Property<int>("LetoIzdaje")
@@ -212,10 +214,10 @@ namespace web.Migrations
                     b.Property<int>("SteviloStrani")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ZalozbaID")
+                    b.Property<int>("ZalozbaID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ZanrID")
+                    b.Property<int>("ZanrID")
                         .HasColumnType("int");
 
                     b.HasKey("GradivoID");
@@ -239,7 +241,7 @@ namespace web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GradivoIzvodID"), 1L, 1);
 
-                    b.Property<int?>("GradivoID")
+                    b.Property<int>("GradivoID")
                         .HasColumnType("int");
 
                     b.Property<int?>("IzposojaID")
@@ -274,6 +276,7 @@ namespace web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UporabnikID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("IzposojaID");
@@ -316,6 +319,7 @@ namespace web.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UporabnikID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("NakupID");
@@ -333,13 +337,14 @@ namespace web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OcenaID"), 1L, 1);
 
-                    b.Property<int?>("GradivoID")
+                    b.Property<int>("GradivoID")
                         .HasColumnType("int");
 
                     b.Property<string>("Mnenje")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UporabnikID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Vrednost")
@@ -528,22 +533,26 @@ namespace web.Migrations
                     b.HasOne("web.Models.Avtor", "Avtor")
                         .WithMany("Gradiva")
                         .HasForeignKey("AvtorID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("web.Models.Kategorija", "Kategorija")
                         .WithMany("Gradiva")
                         .HasForeignKey("KategorijaID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("web.Models.Zalozba", "Zalozba")
                         .WithMany("Gradiva")
                         .HasForeignKey("ZalozbaID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("web.Models.Zanr", "Zanr")
                         .WithMany("Gradiva")
                         .HasForeignKey("ZanrID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Avtor");
 
@@ -559,7 +568,8 @@ namespace web.Migrations
                     b.HasOne("web.Models.Gradivo", "Gradivo")
                         .WithMany("GradivoIzvodi")
                         .HasForeignKey("GradivoID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("web.Models.Izposoja", "Izposoja")
                         .WithMany("GradivoIzvodi")
@@ -583,7 +593,8 @@ namespace web.Migrations
                     b.HasOne("web.Models.Uporabnik", "Uporabnik")
                         .WithMany("Izposoje")
                         .HasForeignKey("UporabnikID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Uporabnik");
                 });
@@ -593,7 +604,8 @@ namespace web.Migrations
                     b.HasOne("web.Models.Uporabnik", "Uporabnik")
                         .WithMany("Nakupi")
                         .HasForeignKey("UporabnikID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Uporabnik");
                 });
@@ -603,12 +615,14 @@ namespace web.Migrations
                     b.HasOne("web.Models.Gradivo", "Gradivo")
                         .WithMany("Ocene")
                         .HasForeignKey("GradivoID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("web.Models.Uporabnik", "Uporabnik")
                         .WithMany("Ocene")
                         .HasForeignKey("UporabnikID")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Gradivo");
 

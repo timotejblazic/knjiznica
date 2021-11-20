@@ -146,9 +146,9 @@ namespace web.Data
 
 
             var ocene=new Ocena[]{
-                new Ocena{Vrednost=Vrednost.A,Mnenje="Super knjiga!",UporabnikID="1",GradivoID=1},
-                new Ocena{Vrednost=Vrednost.B,Mnenje="Moje mnenje",UporabnikID="1",GradivoID=2},
-                new Ocena{Vrednost=Vrednost.B,Mnenje="Priporočam za začetne bralce!",UporabnikID="1",GradivoID=3},
+                new Ocena{Vrednost=3,Mnenje="Super knjiga!",UporabnikID="1",GradivoID=1},
+                new Ocena{Vrednost=5,Mnenje="Moje mnenje",UporabnikID="1",GradivoID=2},
+                new Ocena{Vrednost=1,Mnenje="Priporočam za začetne bralce!",UporabnikID="1",GradivoID=3},
             };
             foreach (Ocena o in ocene)
             {

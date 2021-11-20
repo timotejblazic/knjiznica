@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace web.Controllers
 {
     public class OceneController : Controller
     {
         private readonly KnjiznicaContext _context;
+        private readonly UserManager<Uporabnik> _usermanager;
+        static volatile public int a;
 
-        public OceneController(KnjiznicaContext context)
+        public OceneController(KnjiznicaContext context, UserManager<Uporabnik> userManager)
         {
             _context = context;
+            _usermanager = userManager;
         }
 
         // GET: Ocene
@@ -44,8 +48,9 @@ namespace web.Controllers
         }
 
         // GET: Ocene/Create
-        public IActionResult Create()
+        public IActionResult Create(int idGradivo)
         {
+            a = idGradivo;
             return View();
         }
 
@@ -54,10 +59,14 @@ namespace web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OcenaID,Vrednost,Mnenje")] Ocena ocena)
+        public async Task<IActionResult> Create([Bind("OcenaID,Vrednost,Mnenje,UporabnikID,GradivoID")] Ocena ocena)
         {
+            var currentUser = await _usermanager.GetUserAsync(User);    // trenutni prijavljen uporabnik
+
             if (ModelState.IsValid)
             {
+                ocena.UporabnikID = currentUser.Id;
+                ocena.GradivoID = a;
                 _context.Add(ocena);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

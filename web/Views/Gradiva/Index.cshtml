@@ -90,6 +90,7 @@
                 <a asp-action="Index" asp-route-id="@item.GradivoID">Select</a> |                
                 <a asp-action="Edit" asp-route-id="@item.GradivoID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.GradivoID">Details</a> |
+                <a asp-controller="Ocene" asp-action="Create" asp-route-idGradivo="@item.GradivoID">Oceni</a> |
                 <a asp-action="Delete" asp-route-id="@item.GradivoID">Delete</a>
             </td>
         </tr>

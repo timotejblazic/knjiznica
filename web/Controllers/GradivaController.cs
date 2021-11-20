@@ -149,11 +149,6 @@ namespace web.Controllers
             ViewData["ZanrID"] = new SelectList(_context.Zanri, "ZanrID", "Naziv", gradivo.ZanrID);
             ViewData["ZalozbaID"] = new SelectList(_context.Zalozbe, "ZalozbaID", "Naziv", gradivo.ZalozbaID);
             ViewData["AvtorID"] = new SelectList(_context.Avtorji, "AvtorID", "Ime", gradivo.AvtorID);
-            // Console.WriteLine("KATEGORIJA: " + ViewData["KategorijaID"] + " " + gradivo.KategorijaID);
-            // Console.WriteLine("ZANR: " + ViewData["ZanrID"] + " " + gradivo.ZanrID);
-            // Console.WriteLine("ZALOZBA: " + ViewData["ZalozbaID"] + " " + gradivo.ZalozbaID);
-            // Console.WriteLine("AVTOR: " + ViewData["AvtorID"] + " " + gradivo.AvtorID);
-            // Console.WriteLine(gradivo.GradivoID + " " + gradivo.Naslov + " " + gradivo.LetoIzdaje + " " + gradivo.SteviloStrani + " " + gradivo.Opis + " " + gradivo.KategorijaID + " " + gradivo.ZanrID + " " + gradivo.ZalozbaID + " " + gradivo.AvtorID);
             return View(gradivo);
         }
 
