@@ -8,14 +8,15 @@ namespace web.Models
     {
         public int IzposojaID { get; set; }
         public DateTime DatumIzposoje { get; set; }
-        public DateTime DatumVrnitve { get; set; } 
+        public DateTime DatumVrnitve { get; set; }
+        public int IdIzposojenegaGradiva { get; set; }
         
         //one
         [ForeignKey("Uporabnik")]
         public string? UporabnikID { get; set; }
         public Uporabnik? Uporabnik { get; set; }
 
-        //many
-        public ICollection<GradivoIzvod>? GradivoIzvodi { get; set; }
+        // one to one
+        public GradivoIzvod? GradivoIzvod { get; set; }
     }
 }

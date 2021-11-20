@@ -154,6 +154,28 @@ namespace web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> IzposojaIDZapisiVGradivoIzvod (int? idGradivoIzvod, int? idIzposoja)
+        {
+            var gradivoIzvod = await _context.GradivoIzvodi.Where(
+                gi => gi.GradivoIzvodID == idGradivoIzvod).FirstOrDefaultAsync();
+
+            gradivoIzvod.IzposojaID = idIzposoja;
+            _context.Update(gradivoIzvod);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), "Gradiva");
+        }
+
+        public async Task<IActionResult> NakupIDZapisiVGradivoIzvod (int? idGradivoIzvod, int? idNakup)
+        {
+            var gradivoIzvod = await _context.GradivoIzvodi.Where(
+                gi => gi.GradivoIzvodID == idGradivoIzvod).FirstOrDefaultAsync();
+
+            gradivoIzvod.NakupID = idNakup;
+            _context.Update(gradivoIzvod);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index), "Gradiva");
+        }
+
         private bool GradivoIzvodExists(int id)
         {
             return _context.GradivoIzvodi.Any(e => e.GradivoIzvodID == id);

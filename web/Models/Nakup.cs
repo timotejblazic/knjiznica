@@ -8,14 +8,16 @@ namespace web.Models
     {
         public int NakupID { get; set; }
         public DateTime DatumNakupa { get; set; }
-        public string Cena { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Cena { get; set; }
+        public int IdKupljenegaGradiva { get; set; }
 
         //one
         [ForeignKey("Uporabnik")]
         public string? UporabnikID { get; set; }
         public Uporabnik? Uporabnik { get; set; }
 
-        //many
-        public ICollection<GradivoIzvod>? GradivoIzvodi { get; set; }
+        // one to one
+        public GradivoIzvod? GradivoIzvod { get; set; }
     }
 }

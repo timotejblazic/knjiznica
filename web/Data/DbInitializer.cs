@@ -159,7 +159,7 @@ namespace web.Data
 
 
             var izposoje=new Izposoja[]{
-                new Izposoja{DatumIzposoje=DateTime.Now, DatumVrnitve=DateTime.Now, UporabnikID="1"},
+                new Izposoja{DatumIzposoje=DateTime.Now, DatumVrnitve=DateTime.Now.AddDays(14), IdIzposojenegaGradiva=1,UporabnikID="1"},
             };
             foreach (Izposoja i in izposoje){
                 context.Izposoje.Add(i);
@@ -168,7 +168,7 @@ namespace web.Data
             context.SaveChanges();
 
             var nakupi=new Nakup[]{
-                new Nakup{DatumNakupa=DateTime.Now,Cena="16.87",UporabnikID="1"}
+                new Nakup{DatumNakupa=DateTime.Now,Cena=19.99m,IdKupljenegaGradiva=1,UporabnikID="1"}
             };
             foreach (Nakup n in nakupi){
                 context.Nakupi.Add(n);

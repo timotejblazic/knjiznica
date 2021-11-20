@@ -39,6 +39,7 @@ namespace web.Controllers
             ViewData["CurrentFilter"] = searchString;
             var gradiva = from g in _context.Gradiva
                                         .Include(gi => gi.GradivoIzvodi)
+                                            .ThenInclude(iz => iz.Izposoja)
                                         .Include(z => z.Zanr)
                                         .Include(k => k.Kategorija)
                                         .Include(za => za.Zalozba)

@@ -125,25 +125,48 @@
     <h3>Izvodi gradiv izbranega gradiva</h3>
     <table class="table">
         <tr>
+            <th>#</th>
             <th></th>
-            <th>Številka</th>
+            <th></th>
+            <th>Predivdoma na voljo</th>
         </tr>
 
         @foreach (var item in (IEnumerable<GradivoIzvod>)ViewData["GradivoIzvodiFromGradivoID"])
         {
-            @* TOLE BI PROU PRSLO PRI IZPOSOJI??string selectedRow = "";
-            if (item.GradivoIzvodID == (int?)ViewData["GradivoIzvodID"])
+            @if (item.NakupID == null)
             {
-                selectedRow = "success";
-            } *@
-            <tr>
-                <td>
-                    @Html.ActionLink("Izposodi", "Index", new { gradivoIzvodID = item.GradivoIzvodID })
-                </td>
-                <td>
-                    @item.GradivoIzvodID
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @item.GradivoIzvodID
+                    </td>
+                    <td>
+                        @if (item.IzposojaID == null)
+                        {
+                            <a asp-controller="Izposoje" asp-action="Create" asp-route-idGradivoIzvod="@item.GradivoIzvodID"><button type="button" class="btn btn-success">Izposodi</button></a>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Ni na voljo.</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.IzposojaID == null)
+                        {
+                            <a asp-controller="Nakupi" asp-action="Create" asp-route-idGradivoIzvod="@item.GradivoIzvodID"><button type="button" class="btn btn-info">Kupi</button></a>
+                        }
+                        else
+                        {
+                            <span class="text-danger">Ni na voljo.</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.IzposojaID != null)
+                        {
+                            <span class="text-secondary">@item.Izposoja.DatumVrnitve.ToString("dd.MM.yyyy")</span>
+                        }
+                    </td>
+                </tr>
+            }
         }
 
     </table>
