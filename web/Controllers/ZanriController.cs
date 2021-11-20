@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
+    [Authorize(Roles = "Administrator,Moderator")]
     public class ZanriController : Controller
     {
         private readonly KnjiznicaContext _context;

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
+    [Authorize]
     public class IzposojeController : Controller
     {
         private readonly KnjiznicaContext _context;
@@ -24,6 +25,7 @@ namespace web.Controllers
         }
 
         // GET: Izposoje
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Index()
         {
             var knjiznicaContext = _context.Izposoje.Include(i => i.Uporabnik);
@@ -31,6 +33,7 @@ namespace web.Controllers
         }
 
         // GET: Izposoje/Details/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -79,6 +82,7 @@ namespace web.Controllers
         }
 
         // GET: Izposoje/Edit/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,6 +100,7 @@ namespace web.Controllers
         }
 
         // POST: Izposoje/Edit/5
+        [Authorize(Roles = "Administrator,Moderator")]
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -132,6 +137,7 @@ namespace web.Controllers
         }
 
         // GET: Izposoje/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -151,6 +157,7 @@ namespace web.Controllers
         }
 
         // POST: Izposoje/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

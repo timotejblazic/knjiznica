@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
@@ -122,6 +123,7 @@ namespace web.Controllers
             return View(gradivo);
         }
 
+        [Authorize(Roles = "Administrator,Moderator")]
         // GET: Gradiva/Create
         public IActionResult Create()
         {
@@ -135,6 +137,7 @@ namespace web.Controllers
         // POST: Gradiva/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
@@ -154,6 +157,7 @@ namespace web.Controllers
         }
 
         // GET: Gradiva/Edit/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -177,6 +181,7 @@ namespace web.Controllers
         // POST: Gradiva/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
@@ -215,6 +220,7 @@ namespace web.Controllers
         }
 
         // GET: Gradiva/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -233,6 +239,7 @@ namespace web.Controllers
         }
 
         // POST: Gradiva/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

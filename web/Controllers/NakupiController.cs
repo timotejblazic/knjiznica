@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
+    [Authorize]
     public class NakupiController : Controller
     {
         private readonly KnjiznicaContext _context;
@@ -24,6 +25,7 @@ namespace web.Controllers
         }
 
         // GET: Nakupi
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Index()
         {
             var knjiznicaContext = _context.Nakupi.Include(n => n.Uporabnik);
@@ -31,6 +33,7 @@ namespace web.Controllers
         }
 
         // GET: Nakupi/Details/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -79,6 +82,7 @@ namespace web.Controllers
         }
 
         // GET: Nakupi/Edit/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -98,6 +102,7 @@ namespace web.Controllers
         // POST: Nakupi/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("NakupID,DatumNakupa,Cena,UporabnikID")] Nakup nakup)
@@ -132,6 +137,7 @@ namespace web.Controllers
         }
 
         // GET: Nakupi/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -151,6 +157,7 @@ namespace web.Controllers
         }
 
         // POST: Nakupi/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
@@ -76,6 +77,7 @@ namespace web.Controllers
         }
 
         // GET: Zalozbe/Create
+        [Authorize(Roles = "Administrator,Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -84,6 +86,7 @@ namespace web.Controllers
         // POST: Zalozbe/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ZalozbaID,Naziv,TelefonskaStevilka,Naslov")] Zalozba zalozba)
@@ -98,6 +101,7 @@ namespace web.Controllers
         }
 
         // GET: Zalozbe/Edit/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -116,6 +120,7 @@ namespace web.Controllers
         // POST: Zalozbe/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ZalozbaID,Naziv,TelefonskaStevilka,Naslov")] Zalozba zalozba)
@@ -149,6 +154,7 @@ namespace web.Controllers
         }
 
         // GET: Zalozbe/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -167,6 +173,7 @@ namespace web.Controllers
         }
 
         // POST: Zalozbe/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

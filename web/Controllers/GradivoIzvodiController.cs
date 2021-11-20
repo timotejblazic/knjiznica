@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
-    [Authorize(Roles = "Administrator")]
     public class GradivoIzvodiController : Controller
     {
         private readonly KnjiznicaContext _context;
@@ -22,12 +21,14 @@ namespace web.Controllers
         }
 
         // GET: GradivoIzvodi
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.GradivoIzvodi.ToListAsync());
         }
 
         // GET: GradivoIzvodi/Details/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,6 +50,7 @@ namespace web.Controllers
         }
 
         // GET: GradivoIzvodi/Create
+        [Authorize(Roles = "Administrator,Moderator")]
         public IActionResult Create()
         {
             ViewData["GradivoID"] = new SelectList(_context.Gradiva, "GradivoID", "Naslov");
@@ -58,6 +60,7 @@ namespace web.Controllers
         // POST: GradivoIzvodi/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GradivoIzvodID,GradivoID")] GradivoIzvod gradivoIzvod)
@@ -73,6 +76,7 @@ namespace web.Controllers
         }
 
         // GET: GradivoIzvodi/Edit/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -92,6 +96,7 @@ namespace web.Controllers
         // POST: GradivoIzvodi/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("GradivoIzvodID,GradivoID")] GradivoIzvod gradivoIzvod)
@@ -126,6 +131,7 @@ namespace web.Controllers
         }
 
         // GET: GradivoIzvodi/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,6 +150,7 @@ namespace web.Controllers
         }
 
         // POST: GradivoIzvodi/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

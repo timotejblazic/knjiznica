@@ -25,6 +25,7 @@ namespace web.Controllers
         }
 
         // GET: Ocene
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Ocene.ToListAsync());

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
+    [Authorize(Roles = "Administrator,Moderator")]
     public class KategorijeController : Controller
     {
         private readonly KnjiznicaContext _context;
