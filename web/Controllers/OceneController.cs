@@ -8,14 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
+    [Authorize]
     public class OceneController : Controller
     {
         private readonly KnjiznicaContext _context;
         private readonly UserManager<Uporabnik> _usermanager;
-        static volatile public int a;
 
         public OceneController(KnjiznicaContext context, UserManager<Uporabnik> userManager)
         {
@@ -48,9 +49,22 @@ namespace web.Controllers
         }
 
         // GET: Ocene/Create
-        public IActionResult Create(int idGradivo)
+        public async Task<IActionResult> Create(int idGradivo)
         {
-            a = idGradivo;
+            // preveri če je uporabnik oceno za to gradivo ze podal
+            var currentUser = await _usermanager.GetUserAsync(User);
+
+            var ocena = await _context.Ocene
+                    .Where(o => o.GradivoID == idGradivo)
+                    .Where(o => o.UporabnikID == currentUser.Id)
+                    .FirstOrDefaultAsync();
+            
+            if (ocena != null)
+            {
+                return RedirectToAction("Edit", "Ocene", new { id = ocena.OcenaID, idG = idGradivo, idU = currentUser.Id });
+            }
+
+            TempData["idG"] = idGradivo;
             return View();
         }
 
@@ -66,16 +80,16 @@ namespace web.Controllers
             if (ModelState.IsValid)
             {
                 ocena.UporabnikID = currentUser.Id;
-                ocena.GradivoID = a;
+                ocena.GradivoID = (int)TempData["idG"];
                 _context.Add(ocena);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "Gradiva");
             }
             return View(ocena);
         }
 
         // GET: Ocene/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, int? idG, string? idU)
         {
             if (id == null)
             {
@@ -87,6 +101,8 @@ namespace web.Controllers
             {
                 return NotFound();
             }
+            TempData["idG"] = idG;
+            TempData["idU"] = idU;
             return View(ocena);
         }
 
@@ -106,6 +122,9 @@ namespace web.Controllers
             {
                 try
                 {
+                    Guid temp = (Guid)TempData["idU"];
+                    ocena.UporabnikID = temp.ToString();
+                    ocena.GradivoID = (int)TempData["idG"];
                     _context.Update(ocena);
                     await _context.SaveChangesAsync();
                 }
@@ -120,7 +139,7 @@ namespace web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "Gradiva");
             }
             return View(ocena);
         }

@@ -65,14 +65,13 @@
     {
         <h3>Ocene</h3>
         <table class="table">
-
+            <tr>
+                <th>Uporabnik</th>
+                <th>Ocena</th>
+                <th>Mnenje</th>
+            </tr>
             @foreach (var item in (IEnumerable<Ocena>)ViewData["OceneFromGradivoID"])
             {
-                <tr>
-                    <th>Uporabnik</th>
-                    <th>Ocena</th>
-                    <th>Mnenje</th>
-                </tr>
                 <tr>
                     <td>@item.UporabnikID</td>
                     <td>@item.Vrednost</td>
