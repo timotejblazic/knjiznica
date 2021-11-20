@@ -72,7 +72,7 @@ namespace web.Areas.Identity.Pages.Account.Manage
             public DateTime CasVpisa { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Telefonska številka")]
             public string PhoneNumber { get; set; }
         }
 

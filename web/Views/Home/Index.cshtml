@@ -3,6 +3,21 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Dobrodosli</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Dobrodošli v spletni knjižnici!</h1>
+
+    <form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Išči Gradivo: <input type="text" name="SearchString" value='Gradivo.@ViewData["CurrentFilter"]' />
+            <input type="submit" value="Išči" class="btn btn-default" />
+        </p>
+    </div>
+    <div>
+        NOVICE
+    </div>
+    <div>
+        O knjižnici: Ta spletna knjižnica je nastala pri projektu IS. Ustvarila sta jo Bogdan Korbar in Timotej Blažič.
+        Za vsa vprašanja, probleme, popravke ter druge informacije smo za vas na voljo na elektronski pošti Korbar.Blazic@knjiznica.si
+    </div>
+</form>
 </div>
