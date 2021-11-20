@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
 using web.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace web.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class GradivoIzvodiController : Controller
     {
         private readonly KnjiznicaContext _context;
@@ -34,6 +36,9 @@ namespace web.Controllers
             }
 
             var gradivoIzvod = await _context.GradivoIzvodi
+                .Include(g => g.Gradivo)
+                .Include(i => i.Izposoja)
+                .Include(n => n.Nakup)
                 .FirstOrDefaultAsync(m => m.GradivoIzvodID == id);
             if (gradivoIzvod == null)
             {
@@ -46,6 +51,7 @@ namespace web.Controllers
         // GET: GradivoIzvodi/Create
         public IActionResult Create()
         {
+            ViewData["GradivoID"] = new SelectList(_context.Gradiva, "GradivoID", "Naslov");
             return View();
         }
 
@@ -54,7 +60,7 @@ namespace web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GradivoIzvodID")] GradivoIzvod gradivoIzvod)
+        public async Task<IActionResult> Create([Bind("GradivoIzvodID,GradivoID")] GradivoIzvod gradivoIzvod)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +68,7 @@ namespace web.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GradivoID"] = new SelectList(_context.Gradiva, "GradivoID", "Naslov", gradivoIzvod.GradivoID);
             return View(gradivoIzvod);
         }
 
@@ -78,6 +85,7 @@ namespace web.Controllers
             {
                 return NotFound();
             }
+            ViewData["GradivoID"] = new SelectList(_context.Gradiva, "GradivoID", "Naslov");
             return View(gradivoIzvod);
         }
 
@@ -86,7 +94,7 @@ namespace web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GradivoIzvodID")] GradivoIzvod gradivoIzvod)
+        public async Task<IActionResult> Edit(int id, [Bind("GradivoIzvodID,GradivoID")] GradivoIzvod gradivoIzvod)
         {
             if (id != gradivoIzvod.GradivoIzvodID)
             {
@@ -113,6 +121,7 @@ namespace web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["GradivoID"] = new SelectList(_context.Gradiva, "GradivoID", "Naslov", gradivoIzvod.GradivoID);
             return View(gradivoIzvod);
         }
 

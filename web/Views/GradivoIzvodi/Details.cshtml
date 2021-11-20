@@ -10,6 +10,24 @@
     <h4>GradivoIzvod</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gradivo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gradivo.Naslov)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Izposoja)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Izposoja.IzposojaID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nakup)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nakup.NakupID)
+        </dd>
     </dl>
 </div>
 <div>
