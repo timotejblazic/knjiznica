@@ -16,6 +16,8 @@ builder.Services.AddDefaultIdentity<Uporabnik>(options => options.SignIn.Require
 builder.Services.AddDbContext<KnjiznicaContext>(options => options.UseSqlServer(connectionString));
 
 
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,6 +41,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+});
 app.UseAuthentication();
 app.MapRazorPages();
 app.UseAuthorization();
