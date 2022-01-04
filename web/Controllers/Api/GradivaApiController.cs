@@ -10,7 +10,7 @@ using web.Models;
 
 namespace web.Controllers_Api
 {
-    [Route("api/v1/gradiva")]
+    [Route("api/[controller]")]
     [ApiController]
     public class GradivaApiController : ControllerBase
     {
