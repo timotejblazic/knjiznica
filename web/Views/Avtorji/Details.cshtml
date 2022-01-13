@@ -29,6 +29,28 @@
             @Html.DisplayFor(model => model.Opis)
         </dd>
     </dl>
+    <hr>
+    @if (ViewData["GradivaFromAvtorID"] != null)
+    {
+        <h3>Avtorjeva gradiva</h3>
+        <table class="table">
+            <tr>
+                <th>Naslov</th>
+                <th>Leto izdaje</th>
+                <th>Število strani</th>
+                <th>Opis</th>
+            </tr>
+            @foreach (var item in (IEnumerable<Gradivo>)ViewData["GradivaFromAvtorID"])
+            {
+                <tr>
+                    <td>@item.Naslov</td>
+                    <td>@item.LetoIzdaje</td>
+                    <td>@item.SteviloStrani</td>
+                    <td>@item.Opis</td>
+                </tr>
+            }
+        </table>
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.AvtorID">Uredi</a> |

@@ -90,6 +90,7 @@ namespace web.Controllers
                 return NotFound();
             }
             ViewData["GradivoID"] = new SelectList(_context.Gradiva, "GradivoID", "Naslov");
+            ViewData["IzposojaID"] = gradivoIzvod.IzposojaID;
             return View(gradivoIzvod);
         }
 
@@ -99,7 +100,7 @@ namespace web.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GradivoIzvodID,GradivoID")] GradivoIzvod gradivoIzvod)
+        public async Task<IActionResult> Edit(int id, [Bind("GradivoIzvodID,GradivoID,IzposojaID")] GradivoIzvod gradivoIzvod)
         {
             if (id != gradivoIzvod.GradivoIzvodID)
             {

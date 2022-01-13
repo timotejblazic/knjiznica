@@ -75,10 +75,19 @@ namespace web.Controllers
             }
 
             var avtor = await _context.Avtorji
+                .Include(g => g.Gradiva)
                 .FirstOrDefaultAsync(m => m.AvtorID == id);
             if (avtor == null)
             {
                 return NotFound();
+            }
+
+            if (id != null)
+            {
+                ViewData["AvtorID"] = id.Value;
+                Avtor avtor1 = _context.Avtorji.Where(
+                    a => a.AvtorID == id.Value).Single();
+                ViewData["GradivaFromAvtorID"] = avtor1.Gradiva;
             }
 
             return View(avtor);
