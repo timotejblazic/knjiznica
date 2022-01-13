@@ -5,12 +5,20 @@ Naslov seminarske naloge: E-knjižnica\
 63200468 Bogdan Korbar\
 63200062 Timotej Blažič\
 \
-Pripravila bova informacijski sistem elektronske knjižnice, ki bo omogočal izposojo in nabavo gradiva iz knjižnice. \
-V e-knjižnico se bo za izposojo in nabavo potrebno registrirati in prijaviti. V nasprotnem primeru pa ima uporabnik na voljo le iskalnik gradiva in splošne informacije.\
-Uporabniki bodo lahko gradiva ocenjevali. Sistem bo omogočal pregled gradiva, ki so na voljo, podaljšanje izposoj gradiva in zgodovino izposoj in nabav. \
-Računi se bodo po nekem času ukinili, če uporabnik statusa ne podaljša. Sistem bo določenim uporabnikom (zaposleni/skrbniki/moderatorji) omogočal tudi pisanje novic.\
+zaslonske slike grafičnega vmesnika vaše mobilne aplikacije in spletne aplikacije (cca 5 zaslonskih slik vse skupaj),
 \
-Predvidene entitete: uporabnik, knjiga, žanr, vrsta, avtor, založba, plačilo, izposoja, ocena
+Pripravila sva informacijski sistem elektronske knjižnice, omogoča izposojo in nabavo gradiva iz knjižnice. \
+V e-knjižnico se je za izposojo in nabavo potrebno registrirati in prijaviti. V nasprotnem primeru pa ima uporabnik na voljo le iskalnik gradiva in splošne informacije.\
+Uporabniki lahko gradiva ocenjujejo ter vpogledajo v zgodovino svojih nakupov in izposoj. Sistem omogoča tudi ocenjevanje gradiv \
+Sistem omogoča določenim uporabnikom (zaposleni/skrbniki/moderatorji) vnos novih podatkov ter vpogled v nekatere skrite podatke.
+Android aplikacija omogoča, da uporabniki s ključem vnašajo nove založbe, ter vpogled v te. 
+\
+Bogdan Korbar je naredil Android aplikacijo ter vnos podatkov v bazo, pomagal pa tudi pri modeliranju baze, pripravi strani za prikaz gradiv.
+Timotej Blažič pa je...
+\
+sliko podatkovnega modela podatkovne baze z opisom (diagram lahko zgradite z orodjem SQL Server Management Studio (SSMS)).
+
+
 
 
 
