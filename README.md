@@ -19,7 +19,8 @@ Android aplikacija omogoča, da uporabniki s ključem vnašajo nove založbe, te
 Bogdan Korbar je naredil Android aplikacijo ter vnos podatkov v bazo, pomagal pa tudi pri modeliranju baze, pripravi strani za prikaz gradiv.
 \
 Timotej Blažič pa je...
-\\
+\
+\
 sliko podatkovnega modela podatkovne baze z opisom (diagram lahko zgradite z orodjem SQL Server Management Studio (SSMS)).
 
 
