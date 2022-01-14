@@ -6,9 +6,10 @@ Naslov projekta: E-knjižnica\
 63200062 Timotej Blažič\
 \
 \
-zaslonske slike grafičnega vmesnika vaše mobilne aplikacije in spletne aplikacije (cca 5 zaslonskih slik vse skupaj),
 ![123149496917-82671e69-0367-4dbf-ba2d-d8bd09f4dbad](https://user-images.githubusercontent.com/94176774/149498418-866da415-7e10-4d79-979c-9f3f42c79e2c.png)
 ![149497084-3b1b481c-24a4-4320-9d1a-74d961e46be5](https://user-images.githubusercontent.com/94176774/149497888-66b4d70c-3b11-4221-af20-bc13af9ffb85.png)
+![image](https://user-images.githubusercontent.com/94176774/149506375-3d0cc7e9-7607-462b-959a-9c6d7e31191d.png)
+![image](https://user-images.githubusercontent.com/94176774/149506490-09895e70-52a8-441c-9024-a39b0893849e.png)
 
 
 \
