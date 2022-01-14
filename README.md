@@ -22,7 +22,7 @@ Android aplikacija omogoča, da uporabniki s ključem vnašajo nove založbe, te
 Delo je potekalo tako, da sva si zadala naloge, ter jih sproti opravljala. Komunikacija je potekala s pomočjo Discord-a, ter v živo. Če nekomu ni uspelo opraviti zadane naloge,
 sva si med sabo pomagala. Vsak od naju je ustvaril tudi GitHub repozitorij, tako da sva lahko oba poskusila obe strani skupnega dela v GitHubu.
 \
-Bogdan Korbar je naredil več Android aplikacije, zato je skrbel tudi za Android GitHub repozitorij. Na začetku je vnesel podatke v bazo za testiranje, pomagal pa je tudi pri modeliranju baze ter pripravi nekaterih spletnih strani. Uredil je PUSH in GET metodi znotraj Android aplikacije, ter uredil avtentikacijo.
+Bogdan Korbar je naredil več Android aplikacije, zato je skrbel tudi za Android GitHub repozitorij. Na začetku je vnesel podatke v bazo za testiranje, pomagal pa je tudi pri modeliranju baze ter pripravi nekaterih spletnih strani. Uredil je PUSH in GET metodi znotraj Android aplikacije, ter uredil avtentikacijo. Spisal je tudi večino poročila in opisa nalog.
 \
 Timotej Blažič pa je naredil več spletne aplikacije, zato je skrbel tudi za repozitorij spletne aplikacije. Pripravil je večino spletne aplikacije ter poskbel za prijavo in registracijo uporabnikov sistema, ter za to, da so določeni podatki skriti znotraj spletne aplikacije nekaterim uporabnikom. Uredil je tudi povezavo na Azure oblaku.
 \
