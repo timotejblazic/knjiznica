@@ -27,9 +27,11 @@ Bogdan Korbar je naredil več Android aplikacije, zato je skrbel tudi za Android
 \
 Timotej Blažič pa je naredil več spletne aplikacije, zato je skrbel tudi za repozitorij spletne aplikacije. Pripravil je večino spletne aplikacije ter poskbel za prijavo in registracijo uporabnikov sistema, ter za to, da so določeni podatki skriti znotraj spletne aplikacije nekaterim uporabnikom. Uredil je tudi povezavo na Azure oblaku.
 \
-Pri delu sva prišla do številnih nevšečnostih, npr. ??? katere sva po dolgih razmišljanjih, googlanju??? ter pogovarjanju razrešila.
 \
-sliko podatkovnega modela podatkovne baze z opisom (diagram lahko zgradite z orodjem SQL Server Management Studio (SSMS)).
+Glavna entiteta v najini podatkovni bazi je Gradivo, ki je povezano na Avtorja, Kategorijo, Zanr ter Zalozbo. Vsako Gradivo ima nek Izvod, katerega lahko Uporabnik Izposodi ter Kupi. Uporabnik lahko tudi Oceni neko Gradivo.
+
+![image](https://user-images.githubusercontent.com/94176774/149503450-483c0121-8d4d-4c5a-964a-18d4e2c242bc.png)
+
 
 
 
