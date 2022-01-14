@@ -25,15 +25,15 @@ namespace web.Controllers
         }
 
         // GET: Izposoje
-        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Index()
         {
-            var knjiznicaContext = _context.Izposoje.Include(i => i.Uporabnik);
+            var user = await _usermanager.GetUserAsync(HttpContext.User);
+            var knjiznicaContext = _context.Izposoje.Include(i => i.Uporabnik).Where(id => id.Uporabnik.Id.Equals(user.Id));
+            
             return View(await knjiznicaContext.ToListAsync());
         }
 
         // GET: Izposoje/Details/5
-        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,6 +48,21 @@ namespace web.Controllers
             {
                 return NotFound();
             }
+
+        
+            ViewData["IzposojaID"] = id.Value;
+            Izposoja izposoja1 = _context.Izposoje.Where(
+                i => i.IzposojaID == id.Value).Single();
+
+            GradivoIzvod gi1 = _context.GradivoIzvodi.Where(
+                g => g.GradivoIzvodID == izposoja1.IdIzposojenegaGradiva).Single();
+            
+            Gradivo gr1 = _context.Gradiva.Where(
+                gr => gr.GradivoID == gi1.GradivoID).Single();
+
+            ViewData["GiID"] = gi1.GradivoIzvodID;
+            ViewData["GNaslov"] = gr1.Naslov;
+            ViewData["GStStrani"] = gr1.SteviloStrani;
 
             return View(izposoja);
         }

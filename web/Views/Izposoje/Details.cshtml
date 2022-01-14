@@ -29,6 +29,24 @@
             @Html.DisplayFor(model => model.Uporabnik.Id)
         </dd>
     </dl>
+    <hr>
+    @if (ViewData["GiID"] != null)
+    {
+        <h3>Izposojena gradiva</h3>
+        <table class="table">
+            <tr>
+                <th>GradivoIzvod ID</th>
+                <th>Naslov</th>
+                <th>Število strani</th>
+            </tr>
+            <tr>
+                <td>@ViewData["GiID"]</td>
+                <td>@ViewData["GNaslov"]</td>
+                <td>@ViewData["GStStrani"]</td>
+            </tr>
+        
+        </table>
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.IzposojaID">Edit</a> |
