@@ -8,7 +8,8 @@ Naslov seminarske naloge: E-knjižnica\
 \
 zaslonske slike grafičnega vmesnika vaše mobilne aplikacije in spletne aplikacije (cca 5 zaslonskih slik vse skupaj),
 ![image](https://user-images.githubusercontent.com/94176774/149496917-82671e69-0367-4dbf-ba2d-d8bd09f4dbad.png)
-![image](https://user-images.githubusercontent.com/94176774/149497084-3b1b481c-24a4-4320-9d1a-74d961e46be5.png)
+![149497084-3b1b481c-24a4-4320-9d1a-74d961e46be5](https://user-images.githubusercontent.com/94176774/149497685-c597524b-b529-4352-892b-cdb15f377989.png)
+
 
 \
 \
