@@ -1,12 +1,16 @@
 # knjiznica
 
-Naslov seminarske naloge: E-knjižnica\
+Naslov projekta: E-knjižnica\
 Člana ekipe:\
 63200468 Bogdan Korbar\
 63200062 Timotej Blažič\
 \
 \
 zaslonske slike grafičnega vmesnika vaše mobilne aplikacije in spletne aplikacije (cca 5 zaslonskih slik vse skupaj),
+![123149496917-82671e69-0367-4dbf-ba2d-d8bd09f4dbad](https://user-images.githubusercontent.com/94176774/149498418-866da415-7e10-4d79-979c-9f3f42c79e2c.png)
+![149497084-3b1b481c-24a4-4320-9d1a-74d961e46be5](https://user-images.githubusercontent.com/94176774/149497888-66b4d70c-3b11-4221-af20-bc13af9ffb85.png)
+
+
 \
 \
 Pripravila sva informacijski sistem elektronske knjižnice, omogoča izposojo in nabavo gradiva iz knjižnice. \
@@ -16,10 +20,14 @@ Sistem omogoča določenim uporabnikom (zaposleni/skrbniki/moderatorji) vnos nov
 Android aplikacija omogoča, da uporabniki s ključem vnašajo nove založbe, ter vpogled v te. 
 \
 \
-Bogdan Korbar je naredil Android aplikacijo ter vnos podatkov v bazo, pomagal pa tudi pri modeliranju baze, pripravi strani za prikaz gradiv.
+Delo je potekalo tako, da sva si zadala naloge, ter jih sproti opravljala. Komunikacija je potekala s pomočjo Discord-a, ter v živo. Če nekomu ni uspelo opraviti zadane naloge,
+sva si med sabo pomagala. Vsak od naju je ustvaril tudi GitHub repozitorij, tako da sva lahko oba poskusila obe strani skupnega dela v GitHubu.
 \
-Timotej Blažič pa je...
+Bogdan Korbar je naredil več Android aplikacije, zato je skrbel tudi za Android GitHub repozitorij. Na začetku je vnesel podatke v bazo za testiranje, pomagal pa je tudi pri modeliranju baze ter pripravi nekaterih spletnih strani. Uredil je PUSH in GET metodi znotraj Android aplikacije, ter uredil avtentikacijo. Spisal je tudi večino poročila in opisa nalog.
 \
+Timotej Blažič pa je naredil več spletne aplikacije, zato je skrbel tudi za repozitorij spletne aplikacije. Pripravil je večino spletne aplikacije ter poskbel za prijavo in registracijo uporabnikov sistema, ter za to, da so določeni podatki skriti znotraj spletne aplikacije nekaterim uporabnikom. Uredil je tudi povezavo na Azure oblaku.
+\
+Pri delu sva prišla do številnih nevšečnostih, npr. ??? katere sva po dolgih razmišljanjih, googlanju??? ter pogovarjanju razrešila.
 \
 sliko podatkovnega modela podatkovne baze z opisom (diagram lahko zgradite z orodjem SQL Server Management Studio (SSMS)).
 
