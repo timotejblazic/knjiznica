@@ -31,6 +31,9 @@ Pri delu sva prišla do številnih nevšečnostih, npr. ??? katere sva po dolgih
 \
 sliko podatkovnega modela podatkovne baze z opisom (diagram lahko zgradite z orodjem SQL Server Management Studio (SSMS)).
 
+![image](https://user-images.githubusercontent.com/94176774/149503450-483c0121-8d4d-4c5a-964a-18d4e2c242bc.png)
+
+
 
 
 
