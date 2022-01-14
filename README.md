@@ -1,14 +1,14 @@
 # knjiznica
 
-Naslov seminarske naloge: E-knjižnica\
+Naslov projekta: E-knjižnica\
 Člana ekipe:\
 63200468 Bogdan Korbar\
 63200062 Timotej Blažič\
 \
 \
 zaslonske slike grafičnega vmesnika vaše mobilne aplikacije in spletne aplikacije (cca 5 zaslonskih slik vse skupaj),
-![image](https://user-images.githubusercontent.com/94176774/149496917-82671e69-0367-4dbf-ba2d-d8bd09f4dbad.png)
-![149497084-3b1b481c-24a4-4320-9d1a-74d961e46be5](https://user-images.githubusercontent.com/94176774/149497685-c597524b-b529-4352-892b-cdb15f377989.png)
+![123149496917-82671e69-0367-4dbf-ba2d-d8bd09f4dbad](https://user-images.githubusercontent.com/94176774/149498418-866da415-7e10-4d79-979c-9f3f42c79e2c.png)
+![149497084-3b1b481c-24a4-4320-9d1a-74d961e46be5](https://user-images.githubusercontent.com/94176774/149497888-66b4d70c-3b11-4221-af20-bc13af9ffb85.png)
 
 
 \
