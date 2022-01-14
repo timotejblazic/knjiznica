@@ -9,7 +9,6 @@ namespace web.Models
         public int NakupID { get; set; }
         public DateTime DatumNakupa { get; set; }
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Cena { get; set; }
         public int IdKupljenegaGradiva { get; set; }
 
         //one

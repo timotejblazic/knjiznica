@@ -71,9 +71,9 @@ namespace web.Data
             context.SaveChanges();
 
             var gradiva=new Gradivo[]{
-                new Gradivo{Naslov="Alica v čudežni deželi",LetoIzdaje=2005,SteviloStrani=168,Opis="Alica se odpravi v čudežno deželo, kjer...",KategorijaID=1, ZanrID=2,ZalozbaID=3,AvtorID=1},
-                new Gradivo{Naslov="Asterix in Obelix",LetoIzdaje=1999,SteviloStrani=53,Opis="Sledi Asterixu in Obelixu na njunih dogodivščinah",KategorijaID=2, ZanrID=1,ZalozbaID=2,AvtorID=2},
-                new Gradivo{Naslov="Ta veseli dan",LetoIzdaje=1966,SteviloStrani=300,Opis="Ta veseli dan ali Matiček se ženi govori o...",KategorijaID=3, ZanrID=2,ZalozbaID=5,AvtorID=3}
+                new Gradivo{Naslov="Alica v čudežni deželi",LetoIzdaje=2005,SteviloStrani=168,Opis="Alica se odpravi v čudežno deželo, kjer...",KategorijaID=1, ZanrID=2,ZalozbaID=3,AvtorID=1,CenaGradivo=22.12M},
+                new Gradivo{Naslov="Asterix in Obelix",LetoIzdaje=1999,SteviloStrani=53,Opis="Sledi Asterixu in Obelixu na njunih dogodivščinah",KategorijaID=2, ZanrID=1,ZalozbaID=2,AvtorID=2,CenaGradivo=42.53M},
+                new Gradivo{Naslov="Ta veseli dan",LetoIzdaje=1966,SteviloStrani=300,Opis="Ta veseli dan ali Matiček se ženi govori o...",KategorijaID=3, ZanrID=2,ZalozbaID=5,AvtorID=3,CenaGradivo=12.99M}
             };
             foreach (Gradivo g in gradiva)
             {
@@ -168,7 +168,7 @@ namespace web.Data
             context.SaveChanges();
 
             var nakupi=new Nakup[]{
-                new Nakup{DatumNakupa=DateTime.Now,Cena=19.99m,IdKupljenegaGradiva=1,UporabnikID="1"}
+                new Nakup{DatumNakupa=DateTime.Now,IdKupljenegaGradiva=1,UporabnikID="1"}
             };
             foreach (Nakup n in nakupi){
                 context.Nakupi.Add(n);

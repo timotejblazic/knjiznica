@@ -25,15 +25,14 @@ namespace web.Controllers
         }
 
         // GET: Nakupi
-        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Index()
         {
-            var knjiznicaContext = _context.Nakupi.Include(n => n.Uporabnik);
+            var user = await _usermanager.GetUserAsync(HttpContext.User);
+            var knjiznicaContext = _context.Nakupi.Include(i => i.Uporabnik).Where(id => id.Uporabnik.Id.Equals(user.Id));
             return View(await knjiznicaContext.ToListAsync());
         }
 
         // GET: Nakupi/Details/5
-        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,6 +47,21 @@ namespace web.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["NakupID"] = id.Value;
+            Nakup nakup1 = _context.Nakupi.Where(
+                i => i.NakupID == id.Value).Single();
+
+            GradivoIzvod gi1 = _context.GradivoIzvodi.Where(
+                g => g.GradivoIzvodID == nakup1.IdKupljenegaGradiva).Single();
+            
+            Gradivo gr1 = _context.Gradiva.Where(
+                gr => gr.GradivoID == gi1.GradivoID).Single();
+
+            ViewData["GiID"] = gi1.GradivoIzvodID;
+            ViewData["GNaslov"] = gr1.Naslov;
+            ViewData["GStStrani"] = gr1.SteviloStrani;
+            ViewData["GCena"] = gr1.CenaGradivo;
 
             return View(nakup);
         }
@@ -64,14 +78,13 @@ namespace web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NakupID,DatumNakupa,Cena,UporabnikID,IdKupljenegaGradiva")] Nakup nakup)
+        public async Task<IActionResult> Create([Bind("NakupID,DatumNakupa,UporabnikID,IdKupljenegaGradiva")] Nakup nakup)
         {
             var currentUser = await _usermanager.GetUserAsync(User);
 
             if (ModelState.IsValid)
             {
                 nakup.DatumNakupa = DateTime.Now;
-                nakup.Cena = 10.15m;
                 nakup.UporabnikID = currentUser.Id;
                 nakup.IdKupljenegaGradiva = (int)TempData["idGI"];
                 _context.Add(nakup);
@@ -105,7 +118,7 @@ namespace web.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NakupID,DatumNakupa,Cena,UporabnikID")] Nakup nakup)
+        public async Task<IActionResult> Edit(int id, [Bind("NakupID,DatumNakupa,UporabnikID")] Nakup nakup)
         {
             if (id != nakup.NakupID)
             {

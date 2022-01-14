@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using web.Data;
 
@@ -11,9 +12,10 @@ using web.Data;
 namespace web.Migrations
 {
     [DbContext(typeof(KnjiznicaContext))]
-    partial class KnjiznicaContextModelSnapshot : ModelSnapshot
+    [Migration("20220114094812_GradivoCenaAdd")]
+    partial class GradivoCenaAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -318,11 +320,14 @@ namespace web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NakupID"), 1L, 1);
 
+                    b.Property<decimal>("Cena")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("DatumNakupa")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("IdKupljenegaGradiva")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("IdKupljenegaGradiva")
+                        .HasColumnType("int");
 
                     b.Property<string>("UporabnikID")
                         .HasColumnType("nvarchar(450)");

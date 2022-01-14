@@ -17,18 +17,31 @@
             @Html.DisplayFor(model => model.DatumNakupa)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cena)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cena)
-        </dd>
-        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Uporabnik)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Uporabnik.Id)
         </dd>
     </dl>
+    @if (ViewData["GiID"] != null)
+    {
+        <h3>Kupljena gradiva</h3>
+        <table class="table">
+            <tr>
+                <th>GradivoIzvod ID</th>
+                <th>Naslov</th>
+                <th>Število strani</th>
+                <th>Cena gradiva</th>
+            </tr>
+            <tr>
+                <td>@ViewData["GiID"]</td>
+                <td>@ViewData["GNaslov"]</td>
+                <td>@ViewData["GStStrani"]</td>
+                <td>@ViewData["GCena"]</td>
+            </tr>
+        
+        </table>
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.NakupID">Edit</a> |

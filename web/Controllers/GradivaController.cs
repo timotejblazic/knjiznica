@@ -140,7 +140,7 @@ namespace web.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
+        public async Task<IActionResult> Create([Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,CenaGradivo,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
         {
             if (ModelState.IsValid)
             {
@@ -184,7 +184,7 @@ namespace web.Controllers
         [Authorize(Roles = "Administrator,Moderator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
+        public async Task<IActionResult> Edit(int id, [Bind("GradivoID,Naslov,LetoIzdaje,SteviloStrani,Opis,CenaGradivo,KategorijaID,ZanrID,ZalozbaID,AvtorID")] Gradivo gradivo)
         {
             if (id != gradivo.GradivoID)
             {

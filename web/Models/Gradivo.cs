@@ -12,6 +12,9 @@ namespace web.Models
         public int SteviloStrani { get; set; }
         public string Opis { get; set; }
 
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal CenaGradivo { get; set; }
+
         //one
         [ForeignKey("Kategorija")]
         public int? KategorijaID { get; set; }
