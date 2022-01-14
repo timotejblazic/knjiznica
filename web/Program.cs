@@ -5,7 +5,7 @@ using web.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("AzureKnjiznicaContext");
+var connectionString = builder.Configuration.GetConnectionString("AzureKnjiznicaNewContext");
 
 // Add services to the container.lel
 builder.Services.AddControllersWithViews();
