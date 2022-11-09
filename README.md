@@ -2,8 +2,8 @@
 
 Naslov projekta: E-knjižnica\
 Člana ekipe:\
-63200468 Bogdan Korbar\
-63200062 Timotej Blažič\
+Bogdan Korbar\
+Timotej Blažič\
 \
 \
 ![123149496917-82671e69-0367-4dbf-ba2d-d8bd09f4dbad](https://user-images.githubusercontent.com/94176774/149498418-866da415-7e10-4d79-979c-9f3f42c79e2c.png)
